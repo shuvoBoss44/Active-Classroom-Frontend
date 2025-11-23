@@ -72,7 +72,7 @@ export default function PremiumCarousel({ courses }) {
         <ChevronRight className="w-6 h-6" />
       </button>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-12 lg:px-6 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left: Text Content */}
           <div className="space-y-8 order-2 lg:order-1 pb-16 lg:pb-0">

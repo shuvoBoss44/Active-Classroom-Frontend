@@ -107,7 +107,7 @@ export default function CoursesPage() {
       />
 
       {/* FILTER BAR */}
-      <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-gray-200 shadow-sm">
+      <div className="sticky top-20 z-30 bg-white/80 backdrop-blur-xl border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="bg-emerald-100 p-2 rounded-lg text-emerald-700">
