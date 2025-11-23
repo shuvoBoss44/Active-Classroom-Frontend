@@ -6,7 +6,6 @@ import { motion } from "motion/react";
 
 export default function Faculty({ members = [] }) {
   const facultyMembers = members;
-  console.log(facultyMembers);
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
