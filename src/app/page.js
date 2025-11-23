@@ -1,103 +1,170 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import { useState, useEffect } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import Navbar from "@/components/ui/Navbar";
+import Footer from "@/components/ui/Footer";
+import Carousel from "@/components/home/Carousel";
+import PopularCourses from "@/components/home/PopularCourses";
+import Faculty from "@/components/home/Faculty";
+import AboutUs from "@/components/home/AboutUs";
+import Contact from "@/components/home/Contact";
+import StatsCounter from "@/components/home/StatsCounter";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+// --- FALLBACK DATA (Kept as is) ---
+const DEFAULT_WEBSITE = {
+  aboutUs: `<h2>Empowering the Future of Bangladesh</h2><p>Active Classroom is more than just a website; it's a movement. We are dedicated to democratizing education for every student in every corner of the country.</p>`,
+  platformEmail: "hello@activeclassroom.com",
+  contactPhone: "+880 1700-123456",
+  platformAddress: "Level 4, Khan Tower, Dhanmondi 27, Dhaka",
+  socialLinks: {
+    facebook: "https://facebook.com",
+    youtube: "https://youtube.com"
+  }
+};
+
+const DEFAULT_COURSES = [
+  {
+    _id: "fallback-1",
+    title: "HSC Physics 2025: Zero to Hero",
+    thumbnail: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?q=80&w=1000",
+    overview: "Complete syllabus coverage with animated visualizations.",
+    classType: "HSC",
+    price: 5000,
+    discountedPrice: 3500,
+    studentsEnrolled: 1540,
+    examsNumber: 12,
+    instructors: [{ _id: "inst-1", name: "Dr. Ali", role: "Senior Lecturer", profileImage: "/default-avatar-ali.png" }]
+  },
+  {
+    _id: "fallback-2",
+    title: "SSC General Math Crash Course",
+    thumbnail: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1000",
+    overview: "Solve 500+ board questions in 3 months.",
+    classType: "SSC",
+    price: 3000,
+    discountedPrice: 1500,
+    studentsEnrolled: 2100,
+    examsNumber: 8,
+    instructors: [{ _id: "inst-2", name: "Fatima Ma'am", role: "Math Expert", profileImage: "/default-avatar-fatima.png" }]
+  }
+];
+
+export default function HomePage() {
+  const { user, loading: authLoading } = useAuth();
+
+  const [websiteInfo, setWebsiteInfo] = useState({
+    aboutUs: DEFAULT_WEBSITE.aboutUs,
+    platformEmail: DEFAULT_WEBSITE.platformEmail,
+    platformPhone: DEFAULT_WEBSITE.contactPhone,
+    platformAddress: DEFAULT_WEBSITE.platformAddress,
+    socialLinks: DEFAULT_WEBSITE.socialLinks,
+  });
+  const [popularCourses, setPopularCourses] = useState(DEFAULT_COURSES);
+  const [allCourses, setAllCourses] = useState(DEFAULT_COURSES);
+  const [featuredFaculty, setFeaturedFaculty] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Statistics derived from courses
+  const totalStudents = allCourses.reduce((acc, course) => acc + (course.studentsEnrolled || 0), 0);
+  const totalExams = allCourses.reduce((acc, course) => acc + (course.examsNumber || 0), 0);
+  const totalCourses = allCourses.length;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch all data in parallel
+        const [settingsRes, coursesRes, facultyRes] = await Promise.allSettled([
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/settings`).then(r => r.json()),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses`).then(r => r.json()),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/teacher`).then(r => r.json()),
+        ]);
+
+        // Handle settings
+        if (settingsRes.status === 'fulfilled' && settingsRes.value?.success) {
+          const rawWebsite = settingsRes.value.data || {};
+          setWebsiteInfo({
+            aboutUs: rawWebsite.aboutUs || DEFAULT_WEBSITE.aboutUs,
+            platformEmail: rawWebsite.email || DEFAULT_WEBSITE.platformEmail,
+            platformPhone: rawWebsite.phone || DEFAULT_WEBSITE.contactPhone,
+            platformAddress: rawWebsite.address || DEFAULT_WEBSITE.platformAddress,
+            socialLinks: {
+              facebook: rawWebsite.facebook || DEFAULT_WEBSITE.socialLinks.facebook,
+              youtube: rawWebsite.youtube || DEFAULT_WEBSITE.socialLinks.youtube,
+              instagram: rawWebsite.instagram || "",
+              twitter: rawWebsite.twitter || "",
+            },
+          });
+        }
+
+        // Handle courses
+        if (coursesRes.status === 'fulfilled' && coursesRes.value?.success) {
+          const courses = coursesRes.value.data?.courses || coursesRes.value.courses || [];
+          if (Array.isArray(courses) && courses.length > 0) {
+            setPopularCourses(courses);
+            setAllCourses(courses);
+          }
+        }
+
+        // Handle faculty
+        if (facultyRes.status === 'fulfilled' && facultyRes.value?.success) {
+          const faculty = facultyRes.value.data?.teachers || [];
+          setFeaturedFaculty(faculty);
+        }
+      } catch (error) {
+        console.error('Error fetching homepage data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Show loading state
+  if (loading || authLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <main className="min-h-screen bg-gray-50 flex flex-col">
+      <Navbar socialLinks={websiteInfo.socialLinks} />
+
+      {/* Carousel with top 5 courses */}
+      <Carousel courses={popularCourses.slice(0, 5)} />
+
+      <StatsCounter
+        totalStudents={totalStudents}
+        totalCourses={totalCourses}
+        totalExams={totalExams}
+      />
+
+      {/* Popular Courses */}
+      <PopularCourses courses={popularCourses} />
+
+      {/* Faculty Section */}
+      {featuredFaculty.length > 0 ? (
+        <Faculty members={featuredFaculty} />
+      ) : (
+        <Faculty />
+      )}
+
+      <AboutUs content={websiteInfo.aboutUs} />
+
+      <Contact
+        email={websiteInfo.platformEmail}
+        phone={websiteInfo.platformPhone}
+        address={websiteInfo.platformAddress}
+        social={websiteInfo.socialLinks}
+      />
+
+    </main>
   );
 }
