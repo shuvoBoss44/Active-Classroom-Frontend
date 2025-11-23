@@ -65,7 +65,13 @@ const Navbar = () => {
         try {
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/api/enrollments/pending-count`,
-            { credentials: "include" }
+            { 
+              credentials: "include",
+              cache: "no-store", // Disable caching
+              headers: {
+                ...(localStorage.getItem("authToken") ? { "Authorization": `Bearer ${localStorage.getItem("authToken")}` } : {})
+              }
+            }
           );
           const data = await res.json();
           if (data.success) {

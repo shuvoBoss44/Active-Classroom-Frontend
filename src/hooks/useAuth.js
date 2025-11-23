@@ -18,12 +18,17 @@ const useAuth = () => {
       const idToken = await firebaseUser.getIdToken();
 
       // SEND TOKEN TO BACKEND → SETS httpOnly COOKIE
-      await fetch(`${BACKEND_URL}/api/users/sync`, {
+      const res = await fetch(`${BACKEND_URL}/api/users/sync`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ idToken }),
         credentials: "include", // CRITICAL: SENDS & RECEIVES COOKIES
       });
+
+      const data = await res.json();
+      if (data.success && data.data?.token) {
+        localStorage.setItem("authToken", data.data.token);
+      }
 
       setUser(firebaseUser);
     } catch (err) {
@@ -39,14 +44,19 @@ const useAuth = () => {
       credentials: "include",
     });
     await signOut(auth);
+    localStorage.removeItem("authToken");
     setUser(null);
     window.location.href = "/";
   };
 
   const getMe = async () => {
     try {
+      const token = localStorage.getItem("authToken");
       const res = await fetch(`${BACKEND_URL}/api/users/getMe`, {
         credentials: "include", // SENDS THE COOKIE
+        headers: {
+          ...(token ? { "Authorization": `Bearer ${token}` } : {})
+        }
       });
 
       if (!res.ok) {
