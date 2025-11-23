@@ -1,11 +1,12 @@
 // app/payment/failed/page.jsx
 "use client";
 
+import { Suspense } from "react";
 import { AlertTriangle, RotateCw, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-export default function PaymentFailedPage() {
+function PaymentFailedContent() {
   const searchParams = useSearchParams();
   const tranId = searchParams.get("tranId");
   const reason =
@@ -52,5 +53,17 @@ export default function PaymentFailedPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PaymentFailedPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-gray-600">Loading...</div>
+      </div>
+    }>
+      <PaymentFailedContent />
+    </Suspense>
   );
 }
