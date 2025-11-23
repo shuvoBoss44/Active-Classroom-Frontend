@@ -149,10 +149,12 @@ export default function UserAcceptancePage() {
 
   const filteredEnrollments = enrollments.filter(
     (enrollment) =>
-      enrollment.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      enrollment.user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      enrollment.phone.includes(searchQuery) ||
-      enrollment.schoolCollege.toLowerCase().includes(searchQuery.toLowerCase())
+      enrollment.user && ( // Check if user exists
+        enrollment.user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        enrollment.user.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        enrollment.phone?.includes(searchQuery) ||
+        enrollment.schoolCollege?.toLowerCase().includes(searchQuery.toLowerCase())
+      )
   );
 
   if (authLoading || loading && courses.length === 0) {
@@ -273,8 +275,8 @@ export default function UserAcceptancePage() {
                     filteredEnrollments.map((enrollment) => (
                       <tr key={enrollment._id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                         <td className="py-4 px-4">
-                          <div className="font-semibold text-gray-900">{enrollment.user.name}</div>
-                          <div className="text-sm text-gray-500">{enrollment.user.email}</div>
+                          <div className="font-semibold text-gray-900">{enrollment.user?.name || "Unknown User"}</div>
+                          <div className="text-sm text-gray-500">{enrollment.user?.email || "No Email"}</div>
                         </td>
                         <td className="py-4 px-4">
                           <div className="text-gray-700">{enrollment.phone}</div>
