@@ -30,10 +30,12 @@ export default function UserAcceptancePage() {
 
   const fetchCourses = async () => {
     try {
+      console.log("Fetching courses from:", `${process.env.NEXT_PUBLIC_API_URL}/api/courses`); // DEBUG LOG
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses`, {
         credentials: "include",
       });
       const data = await res.json();
+      console.log("Courses response:", data); // DEBUG LOG
       if (data.success) {
         const coursesList = data.data.courses;
         setCourses(coursesList);
@@ -76,6 +78,7 @@ export default function UserAcceptancePage() {
   const fetchEnrollments = async (courseId) => {
     setLoading(true);
     try {
+      console.log("Fetching enrollments for:", courseId); // DEBUG LOG
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/enrollments/course/${courseId}`,
         {
@@ -83,6 +86,7 @@ export default function UserAcceptancePage() {
         }
       );
       const data = await res.json();
+      console.log("Enrollments response:", data); // DEBUG LOG
       if (data.success) {
         setEnrollments(data.data.enrollments);
       }
@@ -110,6 +114,7 @@ export default function UserAcceptancePage() {
         }
       );
       const data = await res.json();
+      console.log("Acceptance toggle response:", data); // DEBUG LOG
       if (data.success) {
         // Update enrollments list
         setEnrollments((prev) =>
