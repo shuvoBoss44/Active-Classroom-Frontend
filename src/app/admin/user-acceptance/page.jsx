@@ -139,6 +139,9 @@ export default function UserAcceptancePage() {
                     : (prev[selectedCourse._id] || 0) + 1 // If revoking, increase count
             }));
         }
+
+        // 5. NEW: Dispatch event to update Navbar badge immediately
+        window.dispatchEvent(new Event("enrollmentUpdated"));
         
         setTimeout(() => {
           setUpdating(null);

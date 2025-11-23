@@ -84,7 +84,18 @@ const Navbar = () => {
       fetchPendingCount();
       // Refresh count every 30 seconds
       const interval = setInterval(fetchPendingCount, 30000);
-      return () => clearInterval(interval);
+
+      // Listen for custom event to trigger immediate refresh
+      const handleEnrollmentUpdate = () => {
+        console.log("🔔 Enrollment update event received, refreshing count...");
+        fetchPendingCount();
+      };
+      window.addEventListener("enrollmentUpdated", handleEnrollmentUpdate);
+
+      return () => {
+        clearInterval(interval);
+        window.removeEventListener("enrollmentUpdated", handleEnrollmentUpdate);
+      };
     }
   }, [user]);
 
