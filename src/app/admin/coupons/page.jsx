@@ -11,6 +11,7 @@ export default function CouponsPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
   const [coupons, setCoupons] = useState([]);
+  const [courses, setCourses] = useState([]); // Store available courses
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
   
@@ -19,7 +20,8 @@ export default function CouponsPage() {
     code: "",
     discountPercentage: 10,
     validUntil: "",
-    maxUses: 100
+    maxUses: 100,
+    courseIds: [] // Array of selected course IDs
   });
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
@@ -31,8 +33,21 @@ export default function CouponsPage() {
         return;
       }
       fetchCoupons();
+      fetchCourses();
     }
   }, [user, authLoading]);
+
+  const fetchCourses = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses`);
+      const data = await res.json();
+      if (data.success) {
+        setCourses(data.data.courses);
+      }
+    } catch (err) {
+      console.error("Failed to fetch courses", err);
+    }
+  };
 
   const fetchCoupons = async () => {
     try {
@@ -65,7 +80,7 @@ export default function CouponsPage() {
       if (res.ok && data.success) {
         setCoupons([data.data.coupon, ...coupons]);
         setShowCreateModal(false);
-        setFormData({ code: "", discountPercentage: 10, validUntil: "", maxUses: 100 });
+        setFormData({ code: "", discountPercentage: 10, validUntil: "", maxUses: 100, courseIds: [] });
       } else {
         setError(data.message || "Failed to create coupon");
       }
@@ -178,6 +193,22 @@ export default function CouponsPage() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-500">Uses Left</span>
                     <span className="font-medium text-gray-900">{coupon.maxUses}</span>
+                  </div>
+                  <div className="pt-2 border-t border-gray-50 mt-2">
+                    <p className="text-xs text-gray-500 mb-1">Applicable to:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {coupon.courseIds && coupon.courseIds.length > 0 ? (
+                        coupon.courseIds.map((c) => (
+                          <span key={c._id || c} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+                            {c.title || "Course"}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="text-xs bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded">
+                          All Courses
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
