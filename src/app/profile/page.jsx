@@ -336,7 +336,7 @@ export default function ProfilePage() {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* User Identity */}
-          <div className="py-10 flex flex-col md:flex-row items-center md:items-end gap-8">
+          <div className="py-8 sm:py-10 flex flex-col md:flex-row items-center md:items-end gap-8">
             <div className="relative group">
               <div className="w-32 h-32 rounded-full p-1 bg-white border-4 border-emerald-50 shadow-xl overflow-hidden relative">
                 <Image
@@ -528,7 +528,7 @@ export default function ProfilePage() {
           <div className="animate-in fade-in duration-500">
             {editing ? (
               // --- EDIT FORM (Full Schema Coverage) ---
-              <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 md:p-10">
+              <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 p-5 sm:p-8 md:p-10">
                 <div className="flex items-center justify-between mb-8">
                   <h2 className="text-2xl font-black text-gray-900">
                     Edit Profile Details

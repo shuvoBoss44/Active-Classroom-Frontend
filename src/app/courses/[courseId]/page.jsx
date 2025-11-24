@@ -173,7 +173,7 @@ export default function CourseDetailsPage() {
       )}
 
       {/* --- 1. HEADER SECTION --- */}
-      <div className="bg-gray-900 text-white pt-12 pb-16 lg:pt-16 lg:pb-24 relative overflow-hidden">
+      <div className="bg-gray-900 text-white pt-8 pb-12 lg:pt-16 lg:pb-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="lg:max-w-[65%] space-y-6">
             {/* Class Type Badge */}
@@ -220,8 +220,8 @@ export default function CourseDetailsPage() {
       </div>
 
       {/* --- 2. MAIN CONTENT GRID --- */}
-      <div className="max-w-7xl mx-auto px-6 py-12 relative">
-        <div className="grid lg:grid-cols-3 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-8 sm:py-12 relative">
+        <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
           {/* LEFT COLUMN: Course Details */}
           <div className="lg:col-span-2 space-y-12">
             {/* Course Stats / Summary */}

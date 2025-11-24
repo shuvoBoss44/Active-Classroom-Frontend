@@ -46,7 +46,7 @@ export default function ExamsListPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-gray-50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-black text-gray-900 mb-8 tracking-tight">All Exams</h1>
 
@@ -67,7 +67,7 @@ export default function ExamsListPage() {
         ) : (
           <div className="grid gap-6">
             {exams.map((exam) => (
-              <div key={exam._id} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div key={exam._id} className="bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div className="flex-1">
                     <h3 className="text-xl font-bold text-gray-900 mb-2">{exam.title}</h3>
                     <div className="flex flex-wrap gap-4 text-sm text-gray-500 font-medium">

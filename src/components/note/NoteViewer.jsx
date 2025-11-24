@@ -93,9 +93,9 @@ export default function NoteViewer({ note, onClose, initialProgress = 0 }) {
   return (
     <div className="fixed inset-0 bg-gray-950 z-50 flex flex-col">
       {/* Header (Controls and Title) */}
-      <div className="bg-gradient-to-r from-indigo-800 to-purple-800 text-white p-4 md:p-6 flex items-center justify-between shadow-2xl z-10">
+      <div className="bg-gradient-to-r from-indigo-800 to-purple-800 text-white p-3 sm:p-4 md:p-6 flex items-center justify-between shadow-2xl z-10 gap-2">
         {/* Left Side: Close and Title */}
-        <div className="flex items-center gap-4 md:gap-6">
+        <div className="flex items-center gap-3 md:gap-6 min-w-0">
           <button
             onClick={onClose}
             className="p-3 md:p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all shadow-md group"

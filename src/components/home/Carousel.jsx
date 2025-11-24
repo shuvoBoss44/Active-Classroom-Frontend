@@ -44,7 +44,7 @@ export default function PremiumCarousel({ courses }) {
 
   return (
     <div
-      className="relative min-h-[85vh] lg:min-h-[90vh] bg-gradient-to-br from-emerald-50 via-white to-teal-50 overflow-hidden flex items-center py-20 lg:py-0 group"
+      className="relative min-h-[600px] lg:min-h-[90vh] bg-gradient-to-br from-emerald-5 via-white to-teal-50 overflow-hidden flex items-center py-12 lg:py-0 group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -58,24 +58,24 @@ export default function PremiumCarousel({ courses }) {
       {/* Navigation Arrows */}
       <button
         onClick={prev}
-        className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/80 hover:bg-white border border-gray-200 shadow-lg hover:shadow-xl flex items-center justify-center text-gray-700 transition-all hover:scale-110 backdrop-blur-sm"
+        className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 hover:bg-white border border-gray-200 shadow-lg hover:shadow-xl flex items-center justify-center text-gray-700 transition-all hover:scale-110 backdrop-blur-sm"
         aria-label="Previous Slide"
       >
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
       <button
         onClick={next}
-        className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/80 hover:bg-white border border-gray-200 shadow-lg hover:shadow-xl flex items-center justify-center text-gray-700 transition-all hover:scale-110 backdrop-blur-sm"
+        className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 hover:bg-white border border-gray-200 shadow-lg hover:shadow-xl flex items-center justify-center text-gray-700 transition-all hover:scale-110 backdrop-blur-sm"
         aria-label="Next Slide"
       >
-        <ChevronRight className="w-6 h-6" />
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           {/* Left: Text Content */}
-          <div className="space-y-8 order-2 lg:order-1 pb-16 lg:pb-0">
+          <div className="space-y-6 sm:space-y-8 order-2 lg:order-1 pb-12 lg:pb-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={course._id}
@@ -83,20 +83,20 @@ export default function PremiumCarousel({ courses }) {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.5 }}
-                className="space-y-6"
+                className="space-y-5 sm:space-y-6"
               >
                 {/* Badges */}
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">
-                    <Sparkles className="w-4 h-4" />
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">
+                    <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
                     {course.classType}
                   </span>
-                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-600 border border-gray-200 shadow-sm">
-                    <Clock className="w-4 h-4 text-emerald-500" />
+                  <span className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white text-gray-600 border border-gray-200 shadow-sm">
+                    <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-500" />
                     {course.duration || "Flexible Schedule"}
                   </span>
                   {hasDiscount && (
-                    <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-bold bg-rose-500 text-white shadow-lg shadow-rose-500/30 animate-pulse">
+                    <span className="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold bg-rose-500 text-white shadow-lg shadow-rose-500/30 animate-pulse">
                       {discountPercent}% OFF
                     </span>
                   )}
@@ -108,21 +108,21 @@ export default function PremiumCarousel({ courses }) {
                 </h1>
 
                 {/* Description */}
-                <p className="text-lg text-gray-600 leading-relaxed max-w-xl line-clamp-3 font-medium">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl line-clamp-3 font-medium">
                   {course.overview}
                 </p>
 
                 {/* Stats & Price */}
-                <div className="flex flex-wrap items-center gap-8 py-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center border border-gray-100 shadow-md">
-                      <Users className="w-6 h-6 text-emerald-600" />
+                <div className="flex flex-wrap items-center gap-6 sm:gap-8 py-2 sm:py-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white flex items-center justify-center border border-gray-100 shadow-md">
+                      <Users className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
                     </div>
                     <div>
-                      <p className="text-3xl font-bold text-gray-900">
+                      <p className="text-2xl sm:text-3xl font-bold text-gray-900">
                         {(course.studentsEnrolled || 0).toLocaleString()}
                       </p>
-                      <p className="text-xs text-gray-500 uppercase tracking-wider font-bold">
+                      <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider font-bold">
                         Students Enrolled
                       </p>
                     </div>
@@ -131,17 +131,17 @@ export default function PremiumCarousel({ courses }) {
                   <div className="hidden sm:block w-px h-14 bg-gray-200" />
 
                   <div>
-                    <div className="flex items-baseline gap-3">
+                    <div className="flex items-baseline gap-2 sm:gap-3">
                       {hasDiscount && (
-                        <span className="text-lg text-gray-400 line-through font-semibold">
+                        <span className="text-base sm:text-lg text-gray-400 line-through font-semibold">
                           ৳{price.toLocaleString()}
                         </span>
                       )}
-                      <span className="text-4xl font-black text-emerald-600">
+                      <span className="text-3xl sm:text-4xl font-black text-emerald-600">
                         ৳{(hasDiscount ? discountedPrice : price).toLocaleString()}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider font-bold">
+                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider font-bold">
                       Course Fee
                     </p>
                   </div>

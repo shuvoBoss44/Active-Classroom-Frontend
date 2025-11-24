@@ -98,11 +98,11 @@ const CourseFilter = ({
   return (
     <div className="w-full space-y-6">
       {/* Main Filter Bar (Card Look) */}
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-        <div className="flex flex-wrap gap-8 items-end">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-5 sm:p-8">
+        <div className="flex flex-wrap gap-4 sm:gap-8 items-end">
           {/* Search Box (Modernized Input) */}
           {showSearch && (
-            <div className="flex-1 min-w-80">
+            <div className="flex-1 w-full sm:min-w-80">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Search Courses
               </label>

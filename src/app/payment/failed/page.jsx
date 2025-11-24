@@ -15,9 +15,9 @@ function PaymentFailedContent() {
   const isCancelled = reason.toLowerCase().includes("cancelled");
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-      <div className="bg-white rounded-xl shadow-2xl p-10 md:p-16 w-full max-w-lg text-center border-t-8 border-red-500">
-        <XCircle className="h-20 w-20 text-red-500 mx-auto mb-6 animate-shake" />
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 sm:p-6">
+      <div className="bg-white rounded-xl shadow-2xl p-6 sm:p-10 md:p-16 w-full max-w-lg text-center border-t-8 border-red-500">
+        <XCircle className="h-16 w-16 sm:h-20 sm:w-20 text-red-500 mx-auto mb-6 animate-shake" />
 
         <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-4">
           Payment {isCancelled ? "Cancelled" : "Failed"}

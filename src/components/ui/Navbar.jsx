@@ -170,21 +170,21 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-16 lg:h-20">
             {/* --- LOGO SECTION --- */}
             <Link
               href="/"
-              className="flex items-center gap-3 group relative z-50"
+              className="flex items-center gap-2 sm:gap-3 group relative z-50"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300">
-                <AcademicCapIcon className="w-6 h-6" />
+              <div className="relative flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300">
+                <AcademicCapIcon className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-gray-900 leading-none tracking-tight">
+                <span className="text-base sm:text-lg font-bold text-gray-900 leading-none tracking-tight">
                   Active
                 </span>
-                <span className="text-sm font-semibold text-emerald-600 leading-none tracking-wide">
+                <span className="text-xs sm:text-sm font-semibold text-emerald-600 leading-none tracking-wide">
                   Classroom
                 </span>
               </div>

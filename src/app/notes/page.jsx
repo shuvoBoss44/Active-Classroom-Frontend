@@ -169,7 +169,7 @@ export default function NotesPage() {
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
       {/* 1. Minimalist Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-6 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               [cite_start]
@@ -191,7 +191,7 @@ export default function NotesPage() {
       </header>
 
       {/* 2. Control Bar (Filters & Search) */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8">
           {/* Left: Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full lg:w-auto pb-2 lg:pb-0">

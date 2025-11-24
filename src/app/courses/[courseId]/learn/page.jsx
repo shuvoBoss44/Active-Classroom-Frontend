@@ -148,8 +148,8 @@ export default function CourseContentPage({ params }) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           
           {/* LEFT COLUMN - Main Content (Videos) */}
           <div className="lg:col-span-8 space-y-8">
@@ -166,10 +166,10 @@ export default function CourseContentPage({ params }) {
                 {course.facebookGroupVideos.map((video, index) => (
                   <div 
                     key={index}
-                    className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all group"
+                    className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all group"
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <div className="flex flex-col sm:flex-row items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-emerald-600 group-hover:text-white transition-colors hidden sm:flex">
                         <PlayCircle className="w-6 h-6" />
                       </div>
                       <div className="flex-1 min-w-0">

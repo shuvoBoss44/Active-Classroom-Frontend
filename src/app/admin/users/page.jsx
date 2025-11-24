@@ -425,7 +425,7 @@ export default function ManageUsers() {
                             isSubmitting && "opacity-70"
                           )}
                         >
-                          {ROLES.map(roleOption => (
+                          {ROLES.filter(r => r !== 'admin').map(roleOption => (
                             <option key={roleOption} value={roleOption}>
                               {roleOption.charAt(0).toUpperCase() +
                                 roleOption.slice(1)}

@@ -47,12 +47,12 @@ function PaymentSuccessContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
         {/* Success Header */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 text-center border-t-4 border-emerald-500">
-          <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="h-12 w-12 text-emerald-600" />
+        <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 md:p-12 text-center border-t-4 border-emerald-500">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="h-10 w-10 sm:h-12 sm:w-12 text-emerald-600" />
           </div>
 
           <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">

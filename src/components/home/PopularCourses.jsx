@@ -17,19 +17,19 @@ export default function PopularCourses({ courses }) {
   const displayCourses = courseArray.slice(0, 4);
 
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-16 sm:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Premium Header */}
-        <div className="text-center mb-16">
-          <p className="text-lg font-semibold text-emerald-600 mb-3 uppercase tracking-wider flex items-center justify-center gap-2">
-            <TrendingUp className="h-5 w-5" /> BEST SELLERS
+        <div className="text-center mb-10 sm:mb-16">
+          <p className="text-base sm:text-lg font-semibold text-emerald-600 mb-2 sm:mb-3 uppercase tracking-wider flex items-center justify-center gap-2">
+            <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" /> BEST SELLERS
           </p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold mb-3 sm:mb-4 leading-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 to-teal-500">
               Our Most Popular Courses
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto mt-4">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto mt-2 sm:mt-4">
             Join thousands of satisfied students and accelerate your academic
             journey with our top-rated programs.
           </p>

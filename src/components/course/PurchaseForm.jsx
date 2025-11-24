@@ -170,63 +170,68 @@ const PurchaseForm = ({ course, user }) => {
   };
 
   return (
-    <div className="bg-white max-w-2xl mx-auto">
-      {/* Header - Improved gradient */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-8 -mx-6 -mt-6 mb-8">
-        <div className="flex items-center gap-3 mb-2">
-          <Lock className="h-6 w-6 text-white" />
-          <h2 className="text-3xl font-extrabold text-white">
+    <div className="bg-white max-w-2xl mx-auto rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 sm:p-8 text-center sm:text-left">
+        <div className="flex flex-col sm:flex-row items-center gap-3 mb-2 justify-center sm:justify-start">
+          <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+            <Lock className="h-6 w-6 text-white" />
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
             Secure Checkout
           </h2>
         </div>
-        <p className="text-emerald-50 text-sm">
-          Complete your enrollment for {course.title}
+        <p className="text-emerald-50 text-sm sm:text-base opacity-90">
+          Complete your enrollment for <span className="font-semibold text-white">{course.title}</span>
         </p>
       </div>
 
-      <div className="space-y-6 px-6 pb-6">
-        {/* Course Summary - Improved layout */}
-        <div className="flex items-start gap-4 p-5 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl border border-gray-200">
-          <div className="w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden border-2 border-white shadow-lg">
+      <div className="p-5 sm:p-8 space-y-8">
+        {/* Course Summary */}
+        <div className="flex flex-col sm:flex-row gap-5 p-4 bg-gray-50 rounded-xl border border-gray-200/60">
+          <div className="w-full sm:w-28 h-40 sm:h-28 flex-shrink-0 rounded-lg overflow-hidden shadow-sm relative group">
             {course.thumbnail ? (
               <img 
                 src={course.thumbnail} 
                 alt={course.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                <BookOpen className="h-12 w-12 text-white" />
+                <BookOpen className="h-10 w-10 text-white" />
               </div>
             )}
           </div>
-          <div className="flex-1">
-            <h3 className="text-lg font-bold text-gray-900 leading-tight mb-2">
+          <div className="flex-1 space-y-2">
+            <h3 className="text-lg font-bold text-gray-900 leading-tight">
               {course.title}
             </h3>
-            <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex flex-wrap items-center gap-2">
               <Badge
                 variant={course.classType === "HSC" ? "secondary" : "subtle"}
-                className="font-semibold text-xs"
+                className="font-semibold text-xs px-2.5 py-0.5"
               >
                 {course.classType} Batch
               </Badge>
-              <span className="text-xs text-gray-500 flex items-center gap-1">
-                <Users className="h-3.5 w-3.5" />
-                {course.studentsEnrolled?.toLocaleString() || 0} Students
+              <span className="text-xs text-gray-500 flex items-center gap-1 bg-white px-2 py-1 rounded-md border border-gray-100">
+                <Users className="h-3 w-3" />
+                {course.studentsEnrolled?.toLocaleString() || 0} Enrolled
               </span>
             </div>
           </div>
         </div>
 
-        {/* Price Breakdown - Improved design */}
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-6 border border-emerald-200">
-          <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <Trophy className="h-5 w-5 text-emerald-600" />
-            Order Summary
-          </h3>
-          <div className="space-y-3">
-            <div className="flex justify-between items-center pb-3 border-b border-emerald-200/50">
+        {/* Price Breakdown */}
+        <div className="bg-white rounded-xl border border-emerald-100 shadow-sm overflow-hidden">
+          <div className="p-5 bg-emerald-50/50 border-b border-emerald-100">
+            <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+              <Trophy className="h-5 w-5 text-emerald-600" />
+              Order Summary
+            </h3>
+          </div>
+          
+          <div className="p-5 space-y-3">
+            <div className="flex justify-between items-center text-sm sm:text-base">
               <span className="text-gray-600">Base Price</span>
               <span className="text-gray-400 line-through font-medium">
                 ৳{originalPrice.toLocaleString()}
@@ -234,7 +239,7 @@ const PurchaseForm = ({ course, user }) => {
             </div>
 
             {course.discountedPrice && (
-              <div className="flex justify-between items-center text-red-600 font-semibold pb-3 border-b border-emerald-200/50">
+              <div className="flex justify-between items-center text-red-600 font-medium text-sm sm:text-base">
                 <span>Sale Discount</span>
                 <span>
                   -৳{(originalPrice - discountedPrice).toLocaleString()}
@@ -243,8 +248,8 @@ const PurchaseForm = ({ course, user }) => {
             )}
 
             {appliedCoupon && (
-              <div className="flex justify-between items-center bg-emerald-100 -mx-6 px-6 py-3 border-y border-emerald-300">
-                <div className="flex items-center gap-2 text-emerald-700 font-semibold">
+              <div className="flex justify-between items-center bg-emerald-50 p-3 rounded-lg border border-emerald-100 text-sm sm:text-base">
+                <div className="flex items-center gap-2 text-emerald-700 font-medium">
                   <CheckCircle className="h-4 w-4" />
                   <span>Coupon ({appliedCoupon.code})</span>
                 </div>
@@ -257,42 +262,34 @@ const PurchaseForm = ({ course, user }) => {
               </div>
             )}
 
-            {/* Final Price Highlight */}
-            <div className="pt-4 bg-gradient-to-r from-emerald-600 to-teal-600 -mx-6 px-6 py-5 -mb-6 rounded-b-2xl">
-              <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-lg">Total Payable</span>
-                <span className="text-white text-3xl font-extrabold">
+            <div className="pt-4 mt-2 border-t border-gray-100">
+              <div className="flex justify-between items-end">
+                <span className="text-gray-800 font-bold text-lg">Total Payable</span>
+                <span className="text-3xl font-extrabold text-emerald-600 leading-none">
                   ৳{finalPrice.toLocaleString()}
                 </span>
               </div>
+              {savings > 0 && (
+                <p className="text-right text-xs font-medium text-emerald-600 mt-1">
+                  You are saving ৳{savings.toLocaleString()} today!
+                </p>
+              )}
             </div>
           </div>
-          
-          {savings > 0 && (
-            <div className="mt-4 text-center">
-              <p className="text-emerald-700 font-bold text-sm bg-white/80 rounded-full py-2 px-4 inline-block">
-                🎉 You're saving ৳{savings.toLocaleString()}!
-              </p>
-            </div>
-          )}
         </div>
 
-        {/* Enrollment Information Section */}
-        <div className="bg-blue-50 rounded-2xl p-6 border-2 border-blue-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
-            <Users className="h-5 h-5 text-blue-600" />
-            Your Information
-          </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Required for course enrollment and Facebook group access
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Phone Number */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Phone Number *
-              </label>
+        {/* Enrollment Information */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-2 mb-2">
+             <div className="p-1.5 bg-blue-50 rounded-md">
+                <Users className="h-5 w-5 text-blue-600" />
+             </div>
+             <h3 className="text-lg font-bold text-gray-900">Your Information</h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-gray-700">Phone Number <span className="text-red-500">*</span></label>
               <input
                 type="tel"
                 value={enrollmentInfo.phone}
@@ -302,23 +299,19 @@ const PurchaseForm = ({ course, user }) => {
                 }}
                 placeholder="01XXXXXXXXX"
                 className={cn(
-                  "w-full px-4 py-3 rounded-lg border-2 focus:ring-2 focus:ring-blue-500 outline-none transition-all",
-                  enrollmentErrors.phone ? "border-red-500 bg-red-50" : "border-gray-300"
+                  "w-full px-4 py-3 rounded-lg border bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 outline-none transition-all",
+                  enrollmentErrors.phone ? "border-red-500 focus:border-red-500" : "border-gray-200 focus:border-blue-500"
                 )}
               />
               {enrollmentErrors.phone && (
-                <p className="text-red-600 text-xs mt-1 flex items-center gap-1">
-                  <AlertCircle className="h-3 w-3" />
-                  {enrollmentErrors.phone}
+                <p className="text-red-500 text-xs flex items-center gap-1">
+                  <AlertCircle className="h-3 w-3" /> {enrollmentErrors.phone}
                 </p>
               )}
             </div>
 
-            {/* Session/Batch */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Session/Batch *
-              </label>
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-gray-700">Session/Batch <span className="text-red-500">*</span></label>
               <input
                 type="text"
                 value={enrollmentInfo.session}
@@ -326,25 +319,21 @@ const PurchaseForm = ({ course, user }) => {
                   setEnrollmentInfo({ ...enrollmentInfo, session: e.target.value });
                   setEnrollmentErrors({ ...enrollmentErrors, session: '' });
                 }}
-                placeholder="2024-2025"
+                placeholder="e.g. 2024-25"
                 className={cn(
-                  "w-full px-4 py-3 rounded-lg border-2 focus:ring-2 focus:ring-blue-500 outline-none transition-all",
-                  enrollmentErrors.session ? "border-red-500 bg-red-50" : "border-gray-300"
+                  "w-full px-4 py-3 rounded-lg border bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 outline-none transition-all",
+                  enrollmentErrors.session ? "border-red-500 focus:border-red-500" : "border-gray-200 focus:border-blue-500"
                 )}
               />
               {enrollmentErrors.session && (
-                <p className="text-red-600 text-xs mt-1 flex items-center gap-1">
-                  <AlertCircle className="h-3 w-3" />
-                  {enrollmentErrors.session}
+                <p className="text-red-500 text-xs flex items-center gap-1">
+                  <AlertCircle className="h-3 w-3" /> {enrollmentErrors.session}
                 </p>
               )}
             </div>
 
-            {/* Facebook Profile Link */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Facebook Profile Link *
-              </label>
+            <div className="md:col-span-2 space-y-1.5">
+              <label className="text-sm font-semibold text-gray-700">Facebook Profile Link <span className="text-red-500">*</span></label>
               <input
                 type="url"
                 value={enrollmentInfo.facebookId}
@@ -352,25 +341,21 @@ const PurchaseForm = ({ course, user }) => {
                   setEnrollmentInfo({ ...enrollmentInfo, facebookId: e.target.value });
                   setEnrollmentErrors({ ...enrollmentErrors, facebookId: '' });
                 }}
-                placeholder="https://facebook.com/yourprofile"
+                placeholder="https://facebook.com/your.profile"
                 className={cn(
-                  "w-full px-4 py-3 rounded-lg border-2 focus:ring-2 focus:ring-blue-500 outline-none transition-all",
-                  enrollmentErrors.facebookId ? "border-red-500 bg-red-50" : "border-gray-300"
+                  "w-full px-4 py-3 rounded-lg border bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 outline-none transition-all",
+                  enrollmentErrors.facebookId ? "border-red-500 focus:border-red-500" : "border-gray-200 focus:border-blue-500"
                 )}
               />
               {enrollmentErrors.facebookId && (
-                <p className="text-red-600 text-xs mt-1 flex items-center gap-1">
-                  <AlertCircle className="h-3 w-3" />
-                  {enrollmentErrors.facebookId}
+                <p className="text-red-500 text-xs flex items-center gap-1">
+                  <AlertCircle className="h-3 w-3" /> {enrollmentErrors.facebookId}
                 </p>
               )}
             </div>
 
-            {/* School/College */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                School/College Name *
-              </label>
+            <div className="md:col-span-2 space-y-1.5">
+              <label className="text-sm font-semibold text-gray-700">School/College Name <span className="text-red-500">*</span></label>
               <input
                 type="text"
                 value={enrollmentInfo.schoolCollege}
@@ -378,134 +363,100 @@ const PurchaseForm = ({ course, user }) => {
                   setEnrollmentInfo({ ...enrollmentInfo, schoolCollege: e.target.value });
                   setEnrollmentErrors({ ...enrollmentErrors, schoolCollege: '' });
                 }}
-                placeholder="Your Institution Name"
+                placeholder="Enter your institution name"
                 className={cn(
-                  "w-full px-4 py-3 rounded-lg border-2 focus:ring-2 focus:ring-blue-500 outline-none transition-all",
-                  enrollmentErrors.schoolCollege ? "border-red-500 bg-red-50" : "border-gray-300"
+                  "w-full px-4 py-3 rounded-lg border bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 outline-none transition-all",
+                  enrollmentErrors.schoolCollege ? "border-red-500 focus:border-red-500" : "border-gray-200 focus:border-blue-500"
                 )}
               />
               {enrollmentErrors.schoolCollege && (
-                <p className="text-red-600 text-xs mt-1 flex items-center gap-1">
-                  <AlertCircle className="h-3 w-3" />
-                  {enrollmentErrors.schoolCollege}
+                <p className="text-red-500 text-xs flex items-center gap-1">
+                  <AlertCircle className="h-3 w-3" /> {enrollmentErrors.schoolCollege}
                 </p>
               )}
             </div>
           </div>
         </div>
 
-        {/* Coupon Section (Uses temporary CouponInput) */}
-        <div className="bg-emerald-50 rounded-xl p-6 border-2 border-emerald-200">
-          <h3 className="text-lg font-bold text-gray-700 mb-4">
-            Apply Your Coupon Code
-          </h3>
-          <div className="flex gap-3">
+        {/* Coupon Section */}
+        <div className="space-y-3">
+          <label className="text-sm font-semibold text-gray-700">Have a coupon?</label>
+          <div className="flex flex-col sm:flex-row gap-3">
             <CouponInput
               type="text"
               value={couponCode}
               onChange={e => setCouponCode(e.target.value.toUpperCase())}
-              placeholder="Enter coupon code (e.g. SUMMER20)"
+              placeholder="Enter code"
               disabled={appliedCoupon !== null}
+              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all outline-none uppercase text-gray-800 shadow-sm disabled:bg-gray-100 disabled:text-gray-400"
             />
             <Button
               onClick={handleApplyCoupon}
               disabled={!couponCode || isApplyingCoupon || appliedCoupon}
               isLoading={isApplyingCoupon}
-              variant={appliedCoupon ? "success" : "default"}
-              className="px-6 min-w-[120px]"
+              variant={appliedCoupon ? "success" : "outline"}
+              className={cn(
+                "sm:w-auto w-full py-3",
+                appliedCoupon ? "bg-emerald-600 hover:bg-emerald-700 text-white" : "border-emerald-600 text-emerald-600 hover:bg-emerald-50"
+              )}
             >
-              {appliedCoupon ? "Applied!" : "Apply"}
+              {appliedCoupon ? "Applied" : "Apply Coupon"}
             </Button>
           </div>
-          {/* Coupon Feedback */}
           {couponMessage && (
-            <div className={cn("mt-3 text-sm flex items-center gap-2 p-3 rounded-lg", 
-                couponMessage.type === 'success' ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"
+            <div className={cn("text-sm flex items-center gap-2 p-3 rounded-lg animate-in fade-in slide-in-from-top-2", 
+                couponMessage.type === 'success' ? "bg-emerald-50 text-emerald-700 border border-emerald-100" : "bg-red-50 text-red-700 border border-red-100"
             )}>
-              {couponMessage.type === 'success' ? <CheckCircle className="h-4 w-4"/> : <AlertCircle className="h-4 w-4"/>}
+              {couponMessage.type === 'success' ? <CheckCircle className="h-4 w-4 flex-shrink-0"/> : <AlertCircle className="h-4 w-4 flex-shrink-0"/>}
               {couponMessage.text}
             </div>
           )}
         </div>
 
-        {/* What You Get */}
-        <div>
-          <h3 className="text-xl font-bold text-gray-800 mb-6 border-b border-gray-100 pb-2">
-            What's Included in Your Purchase:
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4">
-            {[
-              {
-                icon: <Trophy className="h-6 w-6" />,
-                text: `${course.examsNumber || "12+"} Model Tests + Solutions`,
-                color: "text-amber-500",
-              },
-              {
-                icon: <FileText className="h-6 w-6" />,
-                text: "Chapter-wise Notes (PDF + Drive)",
-                color: "text-indigo-500",
-              },
-              {
-                icon: <Users className="h-6 w-6" />,
-                text: "Exclusive Student Community Access",
-                color: "text-emerald-500",
-              },
-              {
-                icon: <MessageCircle className="h-6 w-6" />,
-                text: "Lifetime Access & Free Updates",
-                color: "text-teal-500",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-4 bg-gray-50 p-4 rounded-lg border border-gray-200"
-              >
-                <div className={cn("flex-shrink-0", item.color)}>
-                  {item.icon}
-                </div>
-                <span className="font-semibold text-gray-700">{item.text}</span>
-              </div>
-            ))}
-          </div>
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-gray-100">
+          {[
+            { icon: Trophy, text: `${course.examsNumber || "12+"} Model Tests`, color: "text-amber-500" },
+            { icon: FileText, text: "Lecture Notes & PDFs", color: "text-indigo-500" },
+            { icon: Users, text: "Private Community", color: "text-emerald-500" },
+            { icon: MessageCircle, text: "Lifetime Access", color: "text-teal-500" },
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 border border-gray-100">
+              <item.icon className={cn("h-5 w-5 flex-shrink-0", item.color)} />
+              <span className="text-sm font-medium text-gray-700">{item.text}</span>
+            </div>
+          ))}
         </div>
 
-        {/* Secure Payment & CTA */}
-        <div className="text-center pt-6 border-t border-gray-100">
-          <div className="flex items-center justify-center gap-2 text-gray-600 mb-4">
-            <Lock className="h-5 w-5 text-emerald-600 animate-pulse" />
-            <span className="font-semibold text-gray-700">
-              Secured Payment Gateway • 256-bit Encryption
-            </span>
-          </div>
-
-          {/* Payment Error Feedback */}
+        {/* Payment Button */}
+        <div className="pt-4 space-y-4">
           {paymentError && (
-             <div className="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded-lg flex items-center gap-2 justify-center">
-                <AlertCircle className="h-4 w-4" />
-                {paymentError}
+             <div className="p-4 bg-red-50 border border-red-100 text-red-600 text-sm rounded-xl flex items-start gap-3">
+                <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                <p>{paymentError}</p>
              </div>
           )}
 
           <Button
             size="lg"
-            className="w-full text-xl py-6 font-bold shadow-lg shadow-emerald-500/20"
+            className="w-full text-lg py-6 font-bold shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all transform hover:-translate-y-0.5"
             onClick={initiatePayment}
             isLoading={isProcessingPayment}
             disabled={isProcessingPayment}
           >
             {isProcessingPayment ? (
-              <>
-                <Loader2 className="h-5 w-5 mr-2 animate-spin" />
-                Processing...
-              </>
+              "Processing Secure Payment..."
             ) : (
-              <>Pay ৳{finalPrice.toLocaleString()} & Enroll</>
+              <span className="flex items-center gap-2">
+                Pay ৳{finalPrice.toLocaleString()} & Enroll Now
+              </span>
             )}
           </Button>
 
-          <p className="text-xs text-gray-400 mt-4">
-            By clicking "Pay & Enroll," you agree to our Terms and Conditions.
-          </p>
+          <div className="flex items-center justify-center gap-2 text-xs text-gray-400">
+            <Lock className="h-3 w-3" />
+            <span>Secured by SSLCommerz • 256-bit Encryption</span>
+          </div>
         </div>
       </div>
     </div>

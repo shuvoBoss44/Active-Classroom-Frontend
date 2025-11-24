@@ -580,9 +580,9 @@ export default function EditCoursePage() {
               {formData.facebookGroupVideos.map((video, index) => (
                 <div
                   key={index}
-                  className="flex gap-4 p-4 border border-gray-100 rounded-lg bg-gray-50 items-end"
+                  className="flex flex-col sm:flex-row gap-4 p-4 border border-gray-100 rounded-lg bg-gray-50 items-end"
                 >
-                  <div className="flex-1">
+                  <div className="w-full sm:flex-1">
                     <label className="block text-xs font-medium text-gray-500 mb-1">
                       Video Title
                     </label>
@@ -598,7 +598,7 @@ export default function EditCoursePage() {
                       placeholder="Lecture 1: Introduction"
                     />
                   </div>
-                  <div className="flex-1">
+                  <div className="w-full sm:flex-1">
                     <label className="block text-xs font-medium text-gray-500 mb-1">
                       Video URL
                     </label>
@@ -615,7 +615,7 @@ export default function EditCoursePage() {
                       placeholder="https://facebook.com/..."
                     />
                   </div>
-                  <div className="flex-1">
+                  <div className="w-full sm:flex-1">
                     <label className="block text-xs font-medium text-gray-500 mb-1">
                       Lecture Sheet URL (Optional)
                     </label>
@@ -631,18 +631,20 @@ export default function EditCoursePage() {
                       placeholder="https://drive.google.com/..."
                     />
                   </div>
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    onClick={() => {
-                        const newVideos = formData.facebookGroupVideos.filter((_, i) => i !== index);
-                        setFormData({ ...formData, facebookGroupVideos: newVideos });
-                    }}
-                    className="h-10 w-10"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <div className="flex justify-end sm:block w-full sm:w-auto">
+                    <Button
+                        type="button"
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => {
+                            const newVideos = formData.facebookGroupVideos.filter((_, i) => i !== index);
+                            setFormData({ ...formData, facebookGroupVideos: newVideos });
+                        }}
+                        className="h-10 w-10"
+                    >
+                        <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>

@@ -449,10 +449,10 @@ export default function CreateCoursePage() {
               {formData.faq.map((item, index) => (
                 <div
                   key={index}
-                  className="flex gap-4 p-4 border border-gray-100 rounded-lg bg-gray-50"
+                  className="flex flex-col sm:flex-row gap-4 p-4 border border-gray-100 rounded-lg bg-gray-50"
                 >
                   {/* Question */}
-                  <div className="w-1/2">
+                  <div className="w-full sm:w-1/2">
                     <label className="block text-xs font-medium text-gray-500 mb-1">
                       Question
                     </label>
@@ -467,7 +467,7 @@ export default function CreateCoursePage() {
                     />
                   </div>
                   {/* Answer */}
-                  <div className="w-1/2">
+                  <div className="w-full sm:w-1/2">
                     <label className="block text-xs font-medium text-gray-500 mb-1">
                       Answer
                     </label>
@@ -482,15 +482,17 @@ export default function CreateCoursePage() {
                     />
                   </div>
                   {/* Remove Button */}
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    onClick={() => removeFaq(index)}
-                    className="flex-shrink-0 mt-5 h-8 w-8"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <div className="flex justify-end sm:block sm:mt-5">
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="icon"
+                      onClick={() => removeFaq(index)}
+                      className="flex-shrink-0 h-8 w-8"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -513,9 +515,9 @@ export default function CreateCoursePage() {
               {formData.facebookGroupVideos.map((video, index) => (
                 <div
                   key={index}
-                  className="flex gap-4 p-4 border border-gray-100 rounded-lg bg-gray-50 items-end"
+                  className="flex flex-col sm:flex-row gap-4 p-4 border border-gray-100 rounded-lg bg-gray-50 items-end"
                 >
-                  <div className="flex-1">
+                  <div className="w-full sm:flex-1">
                     <label className="block text-xs font-medium text-gray-500 mb-1">
                       Video Title
                     </label>
@@ -531,7 +533,7 @@ export default function CreateCoursePage() {
                       placeholder="Lecture 1: Introduction"
                     />
                   </div>
-                  <div className="flex-1">
+                  <div className="w-full sm:flex-1">
                     <label className="block text-xs font-medium text-gray-500 mb-1">
                       Video URL
                     </label>
@@ -548,7 +550,7 @@ export default function CreateCoursePage() {
                       placeholder="https://facebook.com/..."
                     />
                   </div>
-                  <div className="flex-1">
+                  <div className="w-full sm:flex-1">
                     <label className="block text-xs font-medium text-gray-500 mb-1">
                       Lecture Sheet URL (Optional)
                     </label>
@@ -564,18 +566,20 @@ export default function CreateCoursePage() {
                       placeholder="https://drive.google.com/..."
                     />
                   </div>
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    onClick={() => {
-                        const newVideos = formData.facebookGroupVideos.filter((_, i) => i !== index);
-                        setFormData({ ...formData, facebookGroupVideos: newVideos });
-                    }}
-                    className="h-10 w-10"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <div className="flex justify-end sm:block w-full sm:w-auto">
+                    <Button
+                        type="button"
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => {
+                            const newVideos = formData.facebookGroupVideos.filter((_, i) => i !== index);
+                            setFormData({ ...formData, facebookGroupVideos: newVideos });
+                        }}
+                        className="h-10 w-10"
+                    >
+                        <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>

@@ -84,18 +84,18 @@ export default function StatsCounter({
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative group p-6 md:p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-emerald-100 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300"
+                className="relative group p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-gray-50 border border-gray-100 hover:border-emerald-100 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300"
               >
-                <div className="flex items-center gap-6">
-                  <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110", item.bg)}>
-                    <Icon className={cn("h-8 w-8", item.color)} />
+                <div className="flex items-center gap-4 sm:gap-6">
+                  <div className={cn("w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110", item.bg)}>
+                    <Icon className={cn("h-6 w-6 sm:h-8 sm:w-8", item.color)} />
                   </div>
                   <div>
-                    <p className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
+                    <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
                       {count.toLocaleString()}
                       {count === totalCount ? "+" : ""}
                     </p>
-                    <p className="text-lg font-medium text-gray-500 mt-1">
+                    <p className="text-sm sm:text-lg font-medium text-gray-500 mt-0.5 sm:mt-1">
                       {item.label}
                     </p>
                   </div>

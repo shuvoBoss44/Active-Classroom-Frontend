@@ -130,25 +130,25 @@ const Footer = () => {
       className="w-full bg-[#0a0a0a] text-white mt-20 border-t border-emerald-900/40"
       role="contentinfo"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 text-center md:text-left">
           {/* 1. Brand Section */}
-          <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="flex items-center space-x-4 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg ring-2 ring-emerald-500/30 transition-all group-hover:scale-105">
-                <AcademicCapIcon className="h-6 w-6 text-white" />
+          <div className="lg:col-span-4 space-y-4 sm:space-y-6 flex flex-col items-center md:items-start">
+            <Link href="/" className="flex items-center space-x-3 sm:space-x-4 group">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg ring-2 ring-emerald-500/30 transition-all group-hover:scale-105">
+                <AcademicCapIcon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
-              <div className="flex flex-col">
-                <h2 className="text-xl font-extrabold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-none">
+              <div className="flex flex-col text-left">
+                <h2 className="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-none">
                   Active Classroom
                 </h2>
-                <span className="text-sm font-semibold text-emerald-400 tracking-wider">
+                <span className="text-xs sm:text-sm font-semibold text-emerald-400 tracking-wider">
                   Ed-Tech Platform
                 </span>
               </div>
             </Link>
 
-            {/* Description from Backend (truncated if too long, or static fallback) */}
+            {/* Description */}
             <div
               className="text-gray-400 text-sm leading-relaxed max-w-md line-clamp-3"
               dangerouslySetInnerHTML={{
@@ -157,22 +157,21 @@ const Footer = () => {
                   (info.aboutUs?.length > 150 ? "..." : ""),
               }}
             />
-
           </div>
 
           {/* 2. Quick Links */}
-          <div className="lg:col-span-2 md:mt-0">
-            <h3 className="text-lg font-bold text-white mb-6 border-b border-gray-800 pb-2">
+          <div className="lg:col-span-2 md:mt-0 flex flex-col items-center md:items-start">
+            <h3 className="text-lg font-bold text-white mb-4 sm:mb-6 border-b border-gray-800 pb-2 inline-block md:block">
               Explore
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4 w-full flex flex-col items-center md:items-start">
               {navigationLinks.map(item => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-gray-400 hover:text-emerald-400 transition-colors duration-200 flex items-center gap-3 text-sm group"
+                    className="text-gray-400 hover:text-emerald-400 transition-colors duration-200 flex items-center gap-3 text-sm group justify-center md:justify-start"
                   >
-                    <span className="w-1 h-1 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="w-1 h-1 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block" />
                     <span className="group-hover:translate-x-0.5 transition-transform duration-200">
                       {item.name}
                     </span>
@@ -182,19 +181,19 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* 3. Contact Section (Backend Driven) */}
-          <div className="lg:col-span-3">
-            <h3 className="text-lg font-bold text-white mb-6 border-b border-gray-800 pb-2">
+          {/* 3. Contact Section */}
+          <div className="lg:col-span-3 flex flex-col items-center md:items-start">
+            <h3 className="text-lg font-bold text-white mb-4 sm:mb-6 border-b border-gray-800 pb-2 inline-block md:block">
               Get in Touch
             </h3>
 
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5 w-full">
               {/* Phone */}
-              <div className="flex items-start gap-4">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4">
                 <div className="w-10 h-10 bg-emerald-600/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-emerald-500/30">
                   <PhoneIcon className="h-5 w-5 text-emerald-400" />
                 </div>
-                <div>
+                <div className="text-center md:text-left">
                   <p className="text-gray-500 text-xs uppercase tracking-wider">
                     Call Us
                   </p>
@@ -208,11 +207,11 @@ const Footer = () => {
               </div>
 
               {/* Email */}
-              <div className="flex items-start gap-4">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4">
                 <div className="w-10 h-10 bg-emerald-600/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-emerald-500/30">
                   <EnvelopeIcon className="h-5 w-5 text-emerald-400" />
                 </div>
-                <div>
+                <div className="text-center md:text-left">
                   <p className="text-gray-500 text-xs uppercase tracking-wider">
                     Email Us
                   </p>
@@ -226,11 +225,11 @@ const Footer = () => {
               </div>
 
               {/* Address */}
-              <div className="flex items-start gap-4">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4">
                 <div className="w-10 h-10 bg-emerald-600/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-emerald-500/30">
                   <MapPinIcon className="h-5 w-5 text-emerald-400" />
                 </div>
-                <div>
+                <div className="text-center md:text-left">
                   <p className="text-gray-500 text-xs uppercase tracking-wider">
                     Visit Us
                   </p>
@@ -243,13 +242,13 @@ const Footer = () => {
           </div>
 
           {/* 4. Social + Newsletter */}
-          <div className="lg:col-span-3 md:col-span-2">
-            <h3 className="text-lg font-bold text-white mb-6 border-b border-gray-800 pb-2">
+          <div className="lg:col-span-3 md:col-span-2 flex flex-col items-center md:items-start">
+            <h3 className="text-lg font-bold text-white mb-4 sm:mb-6 border-b border-gray-800 pb-2 inline-block md:block">
               Stay Updated
             </h3>
 
-            {/* Social Icons (Dynamic) */}
-            <div className="flex gap-3 mb-8">
+            {/* Social Icons */}
+            <div className="flex gap-3 mb-6 sm:mb-8 justify-center md:justify-start">
               {activeSocials.map(social => {
                 const Icon = social.icon;
                 return (
@@ -258,7 +257,7 @@ const Footer = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-11 h-11 bg-gray-800 rounded-xl flex items-center justify-center hover:scale-105 transition-all duration-300 border border-gray-700 ${social.color}`}
+                    className={`w-10 h-10 sm:w-11 sm:h-11 bg-gray-800 rounded-xl flex items-center justify-center hover:scale-105 transition-all duration-300 border border-gray-700 ${social.color}`}
                     aria-label={`Visit our ${social.name} page`}
                   >
                     <Icon className="w-5 h-5 text-white" />
@@ -268,11 +267,11 @@ const Footer = () => {
             </div>
 
             {/* Newsletter */}
-            <div className="bg-gray-800/60 rounded-xl p-5 border border-gray-700/50 shadow-2xl shadow-black/50">
-              <h4 className="font-bold text-white mb-2 text-base">
+            <div className="bg-gray-800/60 rounded-xl p-4 sm:p-5 border border-gray-700/50 shadow-2xl shadow-black/50 w-full">
+              <h4 className="font-bold text-white mb-2 text-base text-center md:text-left">
                 Get Exclusive Notes
               </h4>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-gray-400 text-sm mb-4 text-center md:text-left">
                 Subscribe for free study materials & offers.
               </p>
 
@@ -283,13 +282,13 @@ const Footer = () => {
                     name="email"
                     placeholder="Enter your email"
                     required
-                    className="flex-1 w-full pl-4 pr-14 py-3 rounded-xl bg-gray-900 border border-gray-700 placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition-all text-white text-sm"
+                    className="flex-1 w-full pl-4 pr-12 sm:pr-14 py-2.5 sm:py-3 rounded-xl bg-gray-900 border border-gray-700 placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition-all text-white text-sm"
                   />
                   <button
                     type="submit"
-                    className="absolute right-1 top-1/2 transform -translate-y-1/2 p-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                    className="absolute right-1 top-1/2 transform -translate-y-1/2 p-1.5 sm:p-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
                   >
-                    <Send className="w-5 h-5" />
+                    <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
                 </div>
               </form>
@@ -322,8 +321,7 @@ const Footer = () => {
 
             {/* Made with */}
             <p className="text-gray-500 text-xs flex items-center justify-center gap-1 order-3">
-              Made with By{" "}
-              <HeartIcon className="h-4 w-4 text-rose-500 animate-pulse" />{" "}
+              Made By{" "}
               <span className="text-emerald-400 font-semibold">{info.founderName}</span>
             </p>
           </div>
